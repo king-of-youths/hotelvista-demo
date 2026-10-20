@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>HotelVista – Better Stays, Happier Guests</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--navy:#172B4D;--teal:#0F766E;--bg:#F5F7FA;--card:#fff;--tx:#172B4D;--mut:#6B778C;--bd:#E3E8EF;--ok:#16a34a;--warn:#d97706;--err:#dc2626;--soft:#EEF2F7;--ai:#E8F1FF;--st:#DDF4EF;--note:#FFF6DB;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){color-scheme:dark;--bg:#0E1626;--card:#16233A;--tx:#E6EBF3;--mut:#93A1B8;--bd:#273650;--soft:#1D2D48;--ai:#1B3358;--st:#0F3B3A;--note:#4A3F18}}
+*{box-sizing:border-box}html,body{margin:0;height:100%}
+body{font:14px/1.45 Inter,system-ui,Segoe UI,sans-serif;background:var(--bg);color:var(--tx)}
+#app{display:flex;min-height:100%}
+aside{width:236px;background:#172B4D;color:#cdd6e6;padding:16px 10px;flex:none;overflow:auto;height:100vh;position:sticky;top:0}
+.logo{display:flex;gap:10px;align-items:center;color:#fff;font-weight:700;font-size:18px;padding:4px 8px}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--teal);display:grid;place-items:center;font-style:normal}
+.tag{font-size:11px;color:#8fa0bd;padding:0 8px 12px}
+.sec{font-size:10px;letter-spacing:.08em;color:#7d8eab;padding:12px 10px 4px}
+aside a{display:flex;gap:10px;align-items:center;padding:8px 10px;border-radius:8px;color:#cdd6e6;text-decoration:none;cursor:pointer}
+aside a:hover{background:#22386300;background:rgba(255,255,255,.07)}aside a.on{background:var(--teal);color:#fff}
+main{flex:1;min-width:0;padding:20px 24px}
+.top{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.top h1{font-size:22px;margin:0;flex:1}
+.btn{border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:8px 12px;border-radius:8px;font:inherit;font-weight:500;cursor:pointer;min-height:36px}
+.btn.p{background:var(--teal);border-color:var(--teal);color:#fff}.btn.n{background:var(--navy);border-color:var(--navy);color:#fff}.btn.d{color:var(--err)}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+#menu{display:none}
+.demo{background:var(--note);border:1px solid var(--warn);border-radius:8px;padding:8px 12px;margin-bottom:16px;font-size:13px}
+.grid{display:grid;gap:14px}.g6{grid-template-columns:repeat(auto-fit,minmax(170px,1fr))}.g2{grid-template-columns:repeat(auto-fit,minmax(340px,1fr))}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:16px;box-shadow:0 1px 3px rgba(23,43,77,.06)}
+.card h3{margin:0 0 12px;font-size:15px}.k{color:var(--mut);font-size:12px}.v{font-size:24px;font-weight:700}
+.wrap{overflow-x:auto}table{border-collapse:collapse;width:100%;min-width:560px}
+th{text-align:left;font-size:12px;color:var(--mut);font-weight:500}th,td{padding:9px 8px;border-bottom:1px solid var(--bd);white-space:nowrap}
+.b{display:inline-block;padding:2px 9px;border-radius:99px;font-size:12px;font-weight:600;background:var(--soft);color:var(--mut)}
+.b.ok{background:#dcfce7;color:#166534}.b.warn{background:#fef3c7;color:#92400e}.b.err{background:#fee2e2;color:#991b1b}.b.ai{background:var(--ai);color:#1d4ed8}.b.st{background:var(--st);color:var(--teal)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]) .b.ok{background:#14532d;color:#bbf7d0}:root:not([data-theme=light]) .b.warn{background:#78350f;color:#fde68a}:root:not([data-theme=light]) .b.err{background:#7f1d1d;color:#fecaca}:root:not([data-theme=light]) .b.ai{color:#bfdbfe}}
+.bars{display:flex;align-items:flex-end;gap:8px;height:140px}.bars div{flex:1;background:var(--teal);border-radius:4px 4px 0 0;position:relative;min-height:4px}
+.bars span{position:absolute;bottom:-18px;left:0;right:0;text-align:center;font-size:11px;color:var(--mut)}
+input,select,textarea{font:inherit;color:var(--tx);background:var(--card);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;width:100%}
+.inbox{display:grid;grid-template-columns:300px 1fr 280px;gap:0;height:calc(100vh - 150px);min-height:480px;background:var(--card);border:1px solid var(--bd);border-radius:12px;overflow:hidden}
+.inbox>div{overflow:auto;min-width:0}.inbox>div+div{border-left:1px solid var(--bd)}
+.cv{padding:12px;border-bottom:1px solid var(--bd);cursor:pointer}.cv:hover,.cv.on{background:var(--soft)}
+.cv .r{display:flex;justify-content:space-between;gap:6px}.cv p{margin:4px 0;color:var(--mut);font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.thread{display:flex;flex-direction:column;height:100%}.msgs{flex:1;overflow:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.m{max-width:78%;padding:9px 12px;border-radius:12px;background:var(--soft)}.m small{display:block;color:var(--mut);font-size:11px;margin-bottom:2px}
+.m.ai{background:var(--ai);align-self:flex-end}.m.staff{background:var(--st);align-self:flex-end;border:1px solid var(--teal)}
+.m.note{background:var(--note);align-self:center;border:1px dashed var(--warn);max-width:90%}.m.sys{align-self:center;background:none;color:var(--mut);font-size:12px;padding:0}
+.comp{border-top:1px solid var(--bd);padding:10px;display:grid;gap:8px}.comp .row{display:flex;gap:8px}
+.side{padding:14px;display:grid;gap:10px;align-content:start}.side .btn{width:100%}
+.aud{font-size:12px;color:var(--mut);border-left:2px solid var(--bd);padding-left:8px;margin:4px 0}
+.flow{display:grid;gap:8px;max-width:640px}.fs{background:var(--soft);border:1px solid var(--bd);border-radius:10px;padding:10px 14px}.fs.dec{border-color:var(--teal);background:var(--st)}.fs.no{border-color:var(--err)}
+.ar{text-align:center;color:var(--mut)}
+.cal{display:grid;grid-template-columns:70px repeat(14,minmax(34px,1fr));gap:2px;min-width:700px;font-size:11px}.cal div{padding:5px 2px;text-align:center}.cal .bk{border-radius:5px;color:#fff;background:var(--teal);overflow:hidden;white-space:nowrap}
+#toast{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));background:var(--navy);color:#fff;padding:10px 14px;border-radius:8px;display:none;z-index:50;max-width:80vw}
+.back{display:none}
+@media(max-width:900px){aside{position:fixed;z-index:30;left:-250px;transition:left .2s}aside.open{left:0}#menu{display:inline-block}main{padding:14px}
+.inbox{grid-template-columns:1fr;height:calc(100vh - 130px)}.inbox>div{display:none}.inbox[data-p="list"]>.l,.inbox[data-p="thread"]>.t,.inbox[data-p="info"]>.s{display:block}.back{display:inline-block}.inbox>div+div{border-left:0}}
+</style></head><body>
+<div id="app"><aside id="sb"></aside><main><div class="top"><button class="btn" id="menu" aria-label="Menu">☰</button><h1 id="ttl"></h1><span class="b ok">● Demo data</span></div><div id="view"></div></main></div>
+<div id="toast"></div>
+<script>
+const $=s=>document.querySelector(s),esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const NAV=[['MAIN',[['dashboard','▦','Dashboard']]],['RESERVATIONS',[['bookings','▤','Bookings'],['calendar','▥','Booking Calendar']]],['HOTEL OPERATIONS',[['rooms','⌂','Rooms'],['guests','☺','Guests'],['requests','✎','Guest Requests']]],['CUSTOMER SUPPORT',[['conversations','✉','Conversations'],['handover','⇄','Staff Handover']]],['MANAGEMENT',[['reports','◔','Reports & Analytics'],['staff','⚙','Staff Management']]],['CONFIGURATION',[['settings','☰','Settings'],['blueprint','◇','Blueprint']]]];
+const TTL={};NAV.forEach(s=>s[1].forEach(i=>TTL[i[0]]=i[2]));
+const ME='Ada (Receptionist)';
+const guests=[['Chidi Okafor','+234 803 000 0001'],['Tonye Briggs','+234 805 000 0002'],['Ebi Preye','+234 802 000 0003'],['Mary Ogoro','+234 810 000 0004'],['Samuel Dickson','+234 807 000 0005']];
+const bookings=[['BK-1042','Chidi Okafor','204 Deluxe','21 Oct','24 Oct','Confirmed','Paid',135000],['BK-1043','Tonye Briggs','101 Standard','21 Oct','22 Oct','Pending','Unpaid',45000],['BK-1044','Ebi Preye','305 Suite','22 Oct','25 Oct','Confirmed','Partially Paid',240000],['BK-1041','Mary Ogoro','102 Standard','19 Oct','21 Oct','Checked In','Paid',90000],['BK-1039','Samuel Dickson','203 Deluxe','18 Oct','20 Oct','Checked Out','Paid',90000]];
+const rooms=[['101','Standard',2,45000,'Wi-Fi, AC','Cleaning'],['102','Standard',2,45000,'Wi-Fi, AC','Occupied'],['203','Deluxe',3,45000,'Wi-Fi, AC, TV','Available for Operations'],['204','Deluxe',3,45000,'Wi-Fi, AC, TV','Available for Operations'],['305','Suite',4,80000,'Wi-Fi, AC, TV, Minibar','Maintenance']];
+const reqs=[['REQ-12','Extra towels','102','Mary Ogoro','New'],['REQ-13','Airport pickup','204','Chidi Okafor','Assigned'],['REQ-14','Late checkout','102','Mary Ogoro','In Progress']];
+const staff=[['Grace Amadi','Manager','Active'],['Ada Nwosu','Receptionist','Active'],['Peter Ibe','Receptionist','Deactivated']];
+const t=(m)=>m;
+let convs=[
+{id:1,g:guests[0],st:'Waiting for Staff',who:null,reason:'Guest requested a human',pri:'High',unread:2,bk:'BK-1042 · 204 Deluxe',msgs:[['guest','Hi, do you have a room for 21–24 Oct?','10:02'],['ai','Yes! A Deluxe room is available at ₦45,000/night. Shall I book it?','10:02'],['guest','Booked already. I need to speak to a person about airport pickup.','10:05'],['sys','Handover requested: guest asked for a human','10:05']],audit:['10:05 AI Handling → Waiting for Staff (guest requested human)']},
+{id:2,g:guests[1],st:'AI Handling',who:null,reason:'—',pri:'Normal',unread:0,bk:'BK-1043 · 101 Standard',msgs:[['guest','What time is check-in?','09:40'],['ai','Check-in starts at 2:00 PM and check-out is by 12:00 noon.','09:40']],audit:[]},
+{id:3,g:guests[3],st:'Staff Handling',who:'Grace Amadi',reason:'Refund request',pri:'High',unread:0,bk:'BK-1041 · 102 Standard',msgs:[['guest','I want a refund for one night.','08:15'],['sys','Grace Amadi took over this conversation','08:20'],['staff','Hello Mary, I’m reviewing this now.','08:21','Grace Amadi'],['note','Forwarded refund request to the manager.','08:25','Grace Amadi']],audit:['08:20 Waiting for Staff → Staff Handling (Grace Amadi)']},
+{id:4,g:guests[4],st:'Resolved',who:'Ada (Receptionist)',reason:'Date change',pri:'Normal',unread:0,bk:'BK-1039 · 203 Deluxe',msgs:[['guest','Thanks for the help!','Yesterday']],audit:[]}];
+let cur=1,mode='reply',panel='list',filt='All';
+function toast(x){const e=$('#toast');e.textContent=x;e.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>e.style.display='none',2600)}
+const cls=s=>({'Confirmed':'ok','Paid':'ok','Checked In':'ok','Active':'ok','Available for Operations':'ok','Completed':'ok','Pending':'warn','Unpaid':'err','Partially Paid':'warn','Cleaning':'warn','Assigned':'warn','In Progress':'warn','New':'err','Maintenance':'err','Deactivated':'err','Occupied':'st','AI Handling':'ai','Waiting for Staff':'warn','Staff Handling':'st','Resolved':'ok','High':'err'}[s]||'');
+const bd=s=>`<span class="b ${cls(s)}">${esc(s)}</span>`;
+const ngn=n=>'₦'+n.toLocaleString();
+const tbl=(h,rows)=>`<div class="wrap"><table><tr>${h.map(x=>`<th>${x}</th>`).join('')}</tr>${rows.map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join('')}</tr>`).join('')}</table></div>`;
+const card=(a,b)=>`<div class="card"><div class="k">${a}</div><div class="v">${b}</div></div>`;
+const attn=()=>convs.filter(c=>c.st==='Waiting for Staff');
+const V={
+dashboard:()=>`<div class="demo">Demonstration data only – not real hotel bookings or revenue.</div>
+<div class="grid g6">${card('Total Bookings',128)+card('Today’s Check-ins',4)+card('Today’s Check-outs',3)+card('Available Rooms',2)+card('Occupancy Rate','68%')+card('Revenue (received)',ngn(1240000))}</div><br>
+<div class="grid g2"><div class="card"><h3>Booking Overview</h3><div class="bars" style="padding-bottom:20px">${[12,18,9,22,16,25,20].map((h,i)=>`<div style="height:${h*4}px"><span>${'MTWTFSS'[i]}</span></div>`).join('')}</div></div>
+<div class="card"><h3>Revenue Overview <span class="k">(payments received)</span></h3><div class="bars" style="padding-bottom:20px">${[40,55,35,70,60,90,75].map((h,i)=>`<div style="height:${h*1.4}px;background:var(--navy)"><span>${'MTWTFSS'[i]}</span></div>`).join('')}</div></div>
+<div class="card"><h3>Conversations Requiring Attention</h3>${attn().map(c=>`<p><b>${esc(c.g[0])}</b> ${bd(c.pri)}<br><span class="k">${esc(c.reason)}</span> <a href="#conversations" onclick="cur=${c.id};panel='thread'">Open →</a></p>`).join('')||'<p class="k">Nothing waiting. 🎉</p>'}</div>
+<div class="card"><h3>Today’s Check-ins</h3>${tbl(['Guest','Room'],[['Chidi Okafor','204'],['Tonye Briggs','101']])}</div></div><br>
+<div class="card"><h3>Recent Bookings</h3>${bkTbl()}</div>`,
+bookings:()=>`<div class="card"><div class="row" style="display:flex;gap:8px;margin-bottom:12px"><input placeholder="Search bookings…"><button class="btn p" onclick="toast('Booking form: server validates room overlap (Stage 4)')">+ New booking</button></div>${bkTbl()}</div>`,
+calendar:()=>{const days=[...Array(14)].map((_,i)=>i+15);const bk={ '204':[6,3],'101':[6,1],'305':[7,3],'102':[4,2]};return`<div class="card wrap"><h3>Oct 15 – Oct 28</h3><div class="cal"><div></div>${days.map(d=>`<div class="k">${d}</div>`).join('')}${rooms.map(r=>`<div><b>${r[0]}</b></div>${days.map((d,i)=>{const b=bk[r[0]];return b&&i===b[0]?`<div class="bk" style="grid-column:span ${b[1]}${r[0]==='305'?';background:var(--warn)':''}">${r[0]==='305'?'Booked':'Guest'}</div>`:(b&&i>b[0]&&i<b[0]+b[1]?'':`<div style="background:var(--soft);border-radius:4px"></div>`)}).join('')}`).join('')}</div></div>`},
+rooms:()=>`<div class="card">${tbl(['Room','Type','Capacity','Price/night','Amenities','Operational status'],rooms.map(r=>[r[0],r[1],r[2],ngn(r[3]),r[4],bd(r[5])]))}<p class="k">Operational status is separate from date-based booking availability.</p></div>`,
+guests:()=>`<div class="card">${tbl(['Guest','Phone','Stays','Upcoming'],guests.map((g,i)=>[g[0],g[1],i+1,i<3?'Yes':'—']))}</div>`,
+requests:()=>`<div class="card">${tbl(['ID','Request','Room','Guest','Status'],reqs.map(r=>[...r.slice(0,4),bd(r[4])]))}</div>`,
+reports:()=>`<div class="demo">Demo metrics. Production reports use real payment records and distinguish booking value from money received.</div><div class="grid g6">${card('AI-handled convos',86)+card('Staff-handled',14)+card('Handovers',17)+card('Unresolved',2)+card('Avg. staff response','4m 20s')}</div>`,
+staff:()=>`<div class="card">${tbl(['Name','Role','Status','Actions'],staff.map(s=>[s[0],s[1],bd(s[2]),'<button class="btn" onclick="toast(\'Manager-only; enforced server-side\')">Manage</button>']))}</div>`,
+settings:()=>`<div class="card">${tbl(['Section','Status'],[['Hotel Profile',bd('Not configured')],['Room Types',bd('Not configured')],['Booking Rules',bd('Not configured')],['Chatbot Settings',bd('Not configured')],['WhatsApp Business API',bd('Disconnected')],['n8n Workflows',bd('Disconnected')],['Supabase',bd('Disconnected')]])}<p class="k">Integrations are placeholders until connected and tested.</p></div>`,
+handover:()=>{const q=convs.filter(c=>c.st==='Waiting for Staff'||c.st==='Staff Handling');return`<div class="card">${q.length?tbl(['Guest','Reason','Priority','Status','Assigned','Actions'],q.map(c=>[esc(c.g[0]),esc(c.reason),bd(c.pri),bd(c.st),c.who||'Unassigned',`<button class="btn" onclick="cur=${c.id};panel='thread';go('conversations')">Open</button> <button class="btn p" ${c.st==='Waiting for Staff'?'':'disabled'} onclick="act(${c.id},'take')">Take over</button>`])):'<p class="k">Queue is empty.</p>'}</div>`},
+blueprint:()=>`<div class="card"><h3>Incoming-message flow (n8n + shared database)</h3><div class="flow">
+${['WhatsApp message arrives → n8n validates webhook signature','Identify guest + conversation','Save message idempotently (unique WhatsApp message ID)','Read authoritative control status from database'].map(x=>`<div class="fs">${x}</div><div class="ar">↓</div>`).join('')}
+<div class="fs dec"><b>Status?</b></div>
+<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(170px,1fr))"><div class="fs no"><b>Staff Handling</b><br>Save + notify staff. No AI reply.</div><div class="fs no"><b>Waiting for Staff</b><br>Keep in queue. No AI reply.</div><div class="fs"><b>AI Handling</b><br>Run AI logic</div></div>
+<div class="ar">↓ (AI path)</div><div class="fs dec">Re-check status immediately before sending. If it changed to Staff Handling → <b>discard the pending reply</b>. If the check fails → fail safe, don’t send.</div><div class="ar">↓</div><div class="fs">Send via WhatsApp → save outgoing message + delivery status</div></div>
+<h3 style="margin-top:20px">Control states</h3><p>${bd('AI Handling')} → ${bd('Waiting for Staff')} → ${bd('Staff Handling')} → ${bd('Resolved')}; Return to AI: Staff Handling → AI Handling. Takeover uses a conditional update (<code>WHERE status = 'Waiting for Staff' OR 'AI Handling'</code>) so only one staff member wins.</p></div>`
+};
+function bkTbl(){return tbl(['ID','Guest','Room','In','Out','Status','Payment','Amount'],bookings.map(b=>[b[0],b[1],b[2],b[3],b[4],bd(b[5]),bd(b[6]),ngn(b[7])]))}
+function conv(){const fl=['All','AI Handling','Waiting for Staff','Staff Handling','Resolved','Assigned to Me','Unassigned'];
+ const list=convs.filter(c=>filt==='All'||c.st===filt||(filt==='Assigned to Me'&&c.who===ME)||(filt==='Unassigned'&&!c.who));
+ const c=convs.find(x=>x.id===cur),ai=c.st==='AI Handling',stf=c.st==='Staff Handling',mine=c.who===ME;
+ return`<div class="inbox" data-p="${panel}"><div class="l"><div style="padding:10px;display:grid;gap:8px"><input placeholder="Search conversations…"><select onchange="filt=this.value;render()">${fl.map(f=>`<option ${f===filt?'selected':''}>${f}</option>`).join('')}</select></div>
+ ${list.map(x=>`<div class="cv ${x.id===cur?'on':''}" onclick="cur=${x.id};panel='thread';render()"><div class="r"><b>${esc(x.g[0])}</b>${x.unread?`<span class="b err">${x.unread}</span>`:''}</div><p>${esc(x.msgs.filter(m=>m[0]==='guest'||m[0]==='ai'||m[0]==='staff').slice(-1)[0]?.[1]||'')}</p>${bd(x.st)} ${x.pri==='High'?bd('High'):''}</div>`).join('')}</div>
+ <div class="t"><div class="thread"><div style="padding:10px 14px;border-bottom:1px solid var(--bd);display:flex;gap:8px;align-items:center"><button class="btn back" onclick="panel='list';render()">←</button><b style="flex:1">${esc(c.g[0])}</b>${bd(c.st)}<button class="btn back" onclick="panel='info';render()">ⓘ</button></div>
+ <div class="msgs" id="msgs">${c.msgs.map(m=>{const k=m[0];const lab={guest:esc(c.g[0]),ai:'🤖 AI chatbot',staff:'👤 '+esc(m[3]||ME),note:'🔒 Internal note · '+esc(m[3]||ME)}[k];return k==='sys'?`<div class="m sys">${esc(m[1])} · ${m[2]}</div>`:`<div class="m ${k}"><small>${lab} · ${m[2]}${k==='staff'?' · ✓ sent':''}</small>${esc(m[1])}</div>`}).join('')}</div>
+ <div class="comp"><div class="row"><button class="btn ${mode==='reply'?'n':''}" onclick="mode='reply';render()">Reply to guest</button><button class="btn ${mode==='note'?'n':''}" onclick="mode='note';render()">Internal note</button></div>
+ <div class="row"><input id="inp" placeholder="${mode==='note'?'Private note (never sent to WhatsApp)':(stf&&mine?'Type a WhatsApp reply…':'Take over to reply')}" ${mode==='reply'&&!(stf&&mine)?'disabled':''} onkeydown="if(event.key==='Enter')send()"><button class="btn p" onclick="send()" ${mode==='reply'&&!(stf&&mine)?'disabled':''}>Send</button></div></div></div></div>
+ <div class="s side"><button class="btn back" onclick="panel='thread';render()">← Back</button><div><b>${esc(c.g[0])}</b><br><span class="k">${esc(c.g[1])}</span></div><div class="k">Booking</div><div>${esc(c.bk)}</div><div class="k">Assigned</div><div>${c.who||'Unassigned'}</div><div class="k">Handover reason</div><div>${esc(c.reason)}</div>
+ <button class="btn p" ${(c.st==='Waiting for Staff'||ai)?'':'disabled'} onclick="act(${c.id},'take')">TAKE OVER CONVERSATION</button>
+ <button class="btn n" ${stf?'':'disabled'} onclick="act(${c.id},'ret')">RETURN TO AI</button>
+ <button class="btn" ${c.st!=='Resolved'?'':'disabled'} onclick="act(${c.id},'res')">RESOLVE CONVERSATION</button>
+ <button class="btn" ${c.st==='Resolved'?'':'disabled'} onclick="act(${c.id},'reopen')">Reopen</button>
+ <hr style="width:100%;border:0;border-top:1px solid var(--bd)"><button class="btn" onclick="sim()">▶ Simulate guest message</button><span class="k">Shows AI pause: replies only when status is AI Handling.</span>
+ <div class="k">Audit log</div>${c.audit.map(a=>`<div class="aud">${esc(a)}</div>`).join('')||'<div class="aud">No events</div>'}</div></div>`}
+const now=()=>new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+function setSt(c,n,why){const o=c.st;c.st=n;c.audit.push(`${now()} ${o} → ${n} (${why})`);c.msgs.push(['sys',why,now()])}
+function act(id,a){const c=convs.find(x=>x.id===id);
+ if(a==='take'){if(!(c.st==='Waiting for Staff'||c.st==='AI Handling'))return toast('Cannot take over: another staff member has control');c.who=ME;setSt(c,'Staff Handling',ME+' took over; AI paused');c.unread=0;toast('AI paused for this conversation only')}
+ if(a==='ret'){if(c.st!=='Staff Handling')return;setSt(c,'AI Handling',ME+' returned to AI');c.who=null;toast('AI resumes on the guest’s next message')}
+ if(a==='res'){const n=prompt('Resolution note (optional)');c.who=c.who||ME;setSt(c,'Resolved','Resolved by '+ME+(n?': '+n:''))}
+ if(a==='reopen'){c.reason='Reopened';setSt(c,'Waiting for Staff','Reopened by '+ME+'; AI stays paused until staff returns control')}
+ render()}
+function send(){const i=$('#inp');if(!i||!i.value.trim())return;const c=convs.find(x=>x.id===cur);
+ if(mode==='note')c.msgs.push(['note',i.value,now(),ME]);else{if(!(c.st==='Staff Handling'&&c.who===ME))return;c.msgs.push(['staff',i.value,now(),ME])}render();const m=$('#msgs');m.scrollTop=m.scrollHeight}
+function sim(){const c=convs.find(x=>x.id===cur);c.msgs.push(['guest','Is breakfast included?',now()]);c.unread=0;
+ if(c.st==='AI Handling'){c.msgs.push(['sys','AI generating reply…',now()]);render();setTimeout(()=>{if(c.st!=='AI Handling'){c.msgs.push(['sys','Pending AI reply discarded (status changed)',now()]);toast('Re-check blocked the AI reply')}else c.msgs.push(['ai','Breakfast is included with Deluxe and Suite rooms.',now()]);render()},1500)}
+ else{toast(c.st==='Staff Handling'?'Saved. Staff notified. No AI reply.':'Saved. No AI reply while '+c.st);render()}render()}
+function go(p){location.hash=p;render()}
+function render(){const p=(location.hash||'#dashboard').slice(1);const key=V[p]||p==='conversations'?p:'dashboard';
+ $('#ttl').textContent=TTL[key];$('#view').innerHTML=key==='conversations'?conv():V[key]();
+ $('#sb').innerHTML=`<div class="logo"><i>H</i>HotelVista</div><div class="tag">Better Stays, Happier Guests.</div>`+NAV.map(s=>`<div class="sec">${s[0]}</div>`+s[1].map(i=>`<a class="${i[0]===key?'on':''}" href="#${i[0]}"><span>${i[1]}</span>${i[2]}${i[0]==='handover'&&attn().length?` <span class="b err" style="margin-left:auto">${attn().length}</span>`:''}</a>`).join('')).join('');
+ $('#sb').classList.remove('open')}
+$('#menu').onclick=()=>$('#sb').classList.toggle('open');addEventListener('hashchange',render);render();
+</script></body></html>
